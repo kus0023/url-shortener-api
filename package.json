@@ -1,0 +1,44 @@
+{
+  "name": "url-shortener-api",
+  "version": "1.0.0",
+  "description": "API for url shortener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kus0023/url-shortener-api.git"
+  },
+  "keywords": [
+    "url",
+    "short",
+    "shorten",
+    "urlshort",
+    "urlshortener",
+    "url-short",
+    "express",
+    "nodejs",
+    "api",
+    "restapi",
+    "url-api"
+  ],
+  "author": "Kumar Utsav Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kus0023/url-shortener-api/issues"
+  },
+  "homepage": "https://github.com/kus0023/url-shortener-api#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "morgan": "^1.10.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1"
+  }
+}

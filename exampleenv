@@ -1,0 +1,11 @@
+
+# MongoDB variables
+MONGODB_URL=
+
+# Application Variables
+APP_NAME=shortify
+APP_DB_NAME=shortify
+PORT=8000
+
+# Session Variables
+SESSION_SECRET=
