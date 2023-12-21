@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const { generateUrl } = require("../helper/generateUrl");
 const WebUrl = require("../models/WebUrl");
 
@@ -6,22 +7,21 @@ class WebUrlService {
 
   async getAllUrlsByUserId(userId) {
     const urls = await WebUrl.find(
-      { createdBy: userId },
-      { shortURL: 1, originalURL: 1, hits: 1 }
+      { createdBy: mongoose.SchemaTypes.ObjectId.set(userId) },
+      { _id: 0, __v: 0, uniqueUrlParam: 0 }
     );
 
     return urls;
   }
 
-  async checkUrl(originalURL, userId) {
+  async checkOriginalUrl(originalURL, userId) {
     const doc = await WebUrl.findOne(
       {
         originalURL: originalURL,
-        createdBy: userId,
+        createdBy: mongoose.SchemaTypes.ObjectId.set(userId),
       },
-      { shortURL: 1, originalURL: 1, hits: 1 }
+      { shortURL: 1 }
     );
-
     return doc;
   }
 
@@ -30,7 +30,7 @@ class WebUrlService {
 
     const data = await WebUrl.create({
       originalURL: originalUrl,
-      createdBy: userId,
+      createdBy: mongoose.SchemaTypes.ObjectId.set(userId),
       shortURL: urlUniqueData.url,
 
       // This unique param will be used to find the short url whenever any user visits the short URL.
@@ -44,6 +44,21 @@ class WebUrlService {
     result.hits = data.hits;
 
     return result;
+  }
+
+  async getOriginalURLByShortId(shortId) {
+    const doc = await WebUrl.findOne(
+      {
+        uniqueUrlParam: shortId,
+      },
+      { originalURL: 1, _id: 0 }
+    );
+
+    if (doc) {
+      return doc.originalURL;
+    } else {
+      return null;
+    }
   }
 }
 
