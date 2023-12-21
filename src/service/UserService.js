@@ -17,7 +17,10 @@ class UserService {
       id: existingUser.id,
       role: existingUser.role,
     };
-    const token = jwt.sign(userPayload, process.env.JWT_SECRET);
+    const token = jwt.sign(userPayload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+      algorithm: "HS256",
+    });
 
     return token;
   }

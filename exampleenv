@@ -7,5 +7,5 @@ APP_NAME=shortify
 APP_DB_NAME=shortify
 PORT=8000
 
-# Session Variables
-SESSION_SECRET=
+# JWT
+JWT_SECRET=
