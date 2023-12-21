@@ -16,7 +16,7 @@ app.use(logger);
 
 app.use(express.json());
 
-app.use("/api", require("./src/routes/api"));
+app.use("/", require("./src/routes"));
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

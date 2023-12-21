@@ -8,7 +8,7 @@ const validateEmail = function (email) {
 };
 
 // create User Schema
-var User = new Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -27,19 +27,20 @@ var User = new Schema(
     role: { type: String, enum: ["user", "admin"], default: "user" },
     password: { type: String, required: [true, "Password is required"] },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    methods: {
+      validPassword: function (password) {
+        return bcrypt.compareSync(password, this.password);
+      },
+    },
+  }
 );
 
-// hash the password
-userSchema.methods.generateHash = function (password) {
+userSchema.statics.generateHash = function (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-// checking if password is valid
-userSchema.methods.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
-};
+const User = mongoose.model("users", userSchema);
 
-//validate email
-
-module.exports = mongoose.model("users", User);
+module.exports = User;
