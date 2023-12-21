@@ -35,5 +35,5 @@ exports.validWebUrl = [
     .trim()
     .notEmpty()
     .isURL()
-    .withMessage("Please provide valid URL"),
+    .withMessage("Please provide valid URL in (body.originalURL)"),
 ];

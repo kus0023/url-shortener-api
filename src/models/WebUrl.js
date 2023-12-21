@@ -4,10 +4,13 @@ const uniqueId = require("../helper/uniqueId");
 
 const webUrlSchema = new Schema(
   {
-    shortURL: { type: String, default: uniqueId },
+    shortURL: String,
     originalURL: String,
     createdBy: { type: Schema.Types.ObjectId, ref: "users" },
     hits: Number,
+
+    // This unique param will be used to find the short url whenever any user visits the short URL.
+    uniqueUrlParam: String,
   },
   { timestamps: true }
 );
