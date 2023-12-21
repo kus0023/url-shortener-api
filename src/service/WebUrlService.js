@@ -60,6 +60,17 @@ class WebUrlService {
       return null;
     }
   }
+
+  async increaseHit(shortId) {
+    const doc = await WebUrl.findOne(
+      {
+        uniqueUrlParam: shortId,
+      },
+      { hits: 1 }
+    );
+
+    await WebUrl.findByIdAndUpdate(doc.id, { hits: doc.hits + 1 });
+  }
 }
 
 const webUrlService = new WebUrlService();

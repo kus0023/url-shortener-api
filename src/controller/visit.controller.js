@@ -6,6 +6,8 @@ exports.visit = async (req, res) => {
   let originalURL = await webUrlService.getOriginalURLByShortId(uniqueUrlParam);
 
   if (originalURL) {
+    // Update the hits
+    await webUrlService.increaseHit(uniqueUrlParam);
     // permanent redirect.
     return res.redirect(301, new URL(originalURL));
   } else {
