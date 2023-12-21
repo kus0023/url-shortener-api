@@ -14,7 +14,7 @@ function authenticate(req, res, next) {
   try {
     const result = jwt.verify(jsonToken, process.env.JWT_SECRET);
 
-    res.user = result.payload;
+    req.user = result;
     next();
   } catch (error) {
     return res.status(403).json({

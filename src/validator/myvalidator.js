@@ -29,3 +29,11 @@ exports.validRegistration = [
     ),
   body("name").trim().notEmpty().withMessage("Please provide your name."),
 ];
+
+exports.validWebUrl = [
+  body("originalURL")
+    .trim()
+    .notEmpty()
+    .isURL()
+    .withMessage("Please provide valid URL"),
+];
