@@ -20,7 +20,7 @@ class WebUrlService {
         originalURL: originalURL,
         createdBy: mongoose.SchemaTypes.ObjectId.set(userId),
       },
-      { shortURL: 1 }
+      { shortURL: 1, _id: 0 }
     );
     return doc;
   }

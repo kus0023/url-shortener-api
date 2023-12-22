@@ -4,7 +4,7 @@ function authenticate(req, res, next) {
   const bearerToken = req.headers.authorization;
 
   if (!bearerToken) {
-    return res.status(403).json({
+    return res.status(401).json({
       message: "Please provide token in authorization header",
     });
   }
@@ -17,7 +17,7 @@ function authenticate(req, res, next) {
     req.user = result;
     next();
   } catch (error) {
-    return res.status(403).json({
+    return res.status(401).json({
       message: "Token is Expired. Please provide valid token",
     });
   }

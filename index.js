@@ -3,15 +3,19 @@ const dotenv = require("dotenv/config");
 const pinoLogger = require("pino-http");
 const helmet = require("helmet");
 
-// connect with database
-require("./src/configs/database/mongodb");
+// connect with database if not testing
 
+if (process.env.NODE_ENV !== "test") {
+  require("./src/configs/database/mongodb");
+}
 const app = express();
 
 app.use(helmet());
 
 // logger
-app.use(pinoLogger());
+if (process.env.NODE_ENV !== "test") {
+  app.use(pinoLogger());
+}
 
 app.use(express.json());
 
@@ -25,6 +29,10 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
+const server = app.listen(PORT, () => {
+  if (process.env.NODE_ENV !== "test") {
+    console.log("Server running on port", PORT);
+  }
 });
+
+module.exports = { app, server };
