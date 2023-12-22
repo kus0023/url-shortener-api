@@ -1,91 +1,105 @@
 # Shortify
 
-API to create short URL.
+API to create short URLs.
 
----
+Deployed On: https://kus-shortyfy-api.onrender.com
 
-## API Doc
+## API Reference
 
-1. User can login
+#### 1. Login user
 
-   POST /login
+```http
+  POST /login
+```
 
-   ```js
-   body{
-       "username": STRING,
-       "password": STRING
-   }
-   ```
+| Body       | Type     | Description                 |
+| :--------- | :------- | :-------------------------- |
+| `username` | `string` | **Required**. Your email    |
+| `password` | `string` | **Required**. Your password |
 
-   Response:
+#### 2. Register User
 
-   - 200 : Returns token { "message": "Successful", "token": "token value"}
-   - 400 : Bad Request ( "message": "Invalid Credentials")
+```http
+  POST /register
+```
 
-2. User can register
+| Body       | Type     | Description                 |
+| :--------- | :------- | :-------------------------- |
+| `name`     | `string` | **Required**. Your Name     |
+| `email`    | `string` | **Required**. Your email    |
+| `password` | `string` | **Required**. Your password |
 
-   POST /register
+Note: Please provide strong password.
+(Min. character 8, atleast 1 uppercase, 1 lowercase, 1 numeric value and 1 symbol should be present.)
 
-   ```js
-   body{
-       "username": STRING,
-       "email": STRING,
-       "name": STRING,
-       "password": STRING
-   }
+#### 3. Get all the URLs
 
-   ```
+```http
+  GET /shorten
+```
 
-   Response:
+| Header          | Type     | Description                             |
+| :-------------- | :------- | :-------------------------------------- |
+| `authorization` | `string` | **Required**. Provide your Bearer Token |
 
-   - 201 : Returns { "message": "Successful" }
-   - 400 : Bad Request ( "message": "Failed", error: [] )
+#### 4. Create Short URL
 
-3. User can get all the list of his URLs
+```http
+  POST /shorten
+```
 
-   GET /weburls
+| Header          | Type     | Description                             |
+| :-------------- | :------- | :-------------------------------------- |
+| `authorization` | `string` | **Required**. Provide your Bearer Token |
 
-   HEADER : authorization: Bearer {TOKEN}
+| Body          | Type     | Description                              |
+| :------------ | :------- | :--------------------------------------- |
+| `originalURL` | `string` | **Required**. Provide original valid URL |
 
-   Response:
+#### 5. Visit short URL
 
-   - 200 : Returns { "message": "Successful", "data": Array of all the URLs}
-   - 403 : Unauthorized
+```http
+  ALL /:id
+```
 
-4. User can send a big URL to shorten it.
+| Parameter | Type     | Description   |
+| :-------- | :------- | :------------ |
+| `id`      | `string` | Any unique Id |
 
-   POST /shorten
+## Run Locally
 
-   HEADER : authorization: Bearer {TOKEN}
+Clone the project
 
-   ```js
-   body{
-       "url": STRING
-   }
+```bash
+  git clone https://github.com/kus0023/url-shortener-api
+```
 
-   ```
+Go to the project directory
 
-   Response:
+```bash
+  cd url-shortener-api
+```
 
-   - 200 : Returns { "message": "Successful", "data": Object containing Shorten URL }
-   - 403 : Unauthorized
+Install dependencies
 
-5. User can able to logoout
+```bash
+  npm install
+```
 
-   POST /logout
+Start the server
 
-   HEADER : authorization: Bearer {TOKEN}
+```bash
+  npm run dev
+```
 
-   Response:
+## Running Tests
 
-   - 200 : { "message": "Successful"}
-   - 403 : Unauthorized
+To run tests, run the following command
 
-6. Public urls
+```bash
+  npm run test
+```
 
-   ALL /v/{url-id}
+## Feedback
 
-   Response:
-
-   - 200 : Redirect to url
-   - 404 : Not found
+If you have any feedback, please reach out to me at kus.maurya0000@gmail.com
