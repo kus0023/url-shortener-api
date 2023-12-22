@@ -4,9 +4,10 @@
   "description": "API for url shortener",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --watchAll --verbose",
+    "test": "NODE_ENV=test jest",
     "start": "NODE_ENV=production node index.js",
-    "dev": "nodemon start"
+    "dev": "nodemon start",
+    "test-watch": "NODE_ENV=test jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
