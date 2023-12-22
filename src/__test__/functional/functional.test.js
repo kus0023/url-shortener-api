@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const request = require("supertest");
-const { server, app } = require("../../index");
+const { server, app } = require("../../../index");
 
 const TEST_EMAIL = "test@email.com";
 const TEST_PASSWORD = "P@assw0(R)d123";
