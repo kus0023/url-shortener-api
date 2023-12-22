@@ -1,5 +1,6 @@
 
 # MongoDB variables
+MONGODB_URL_DEV=
 MONGODB_URL=
 
 # Application Variables

@@ -11,4 +11,10 @@ routes.use("/auth", require("./auth.route"));
  */
 routes.use("/", require("./view.route"));
 
+routes.use("*", (req, res) => {
+  res.status(404).json({
+    message: "You are lost. No content is here.",
+  });
+});
+
 module.exports = routes;

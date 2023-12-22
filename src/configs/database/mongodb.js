@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
-const mongoURL = process.env.MONGODB_URL;
+let mongoURL = process.env.MONGODB_URL_DEV;
 const databaseName = process.env.APP_DB_NAME || "shortify";
+
+if (process.env.NODE_ENV === "production") {
+  console.log("Connecting to production database");
+  mongoURL = process.env.MONGODB_URL;
+}
 
 const mongoCompleteURL = mongoURL + databaseName;
 

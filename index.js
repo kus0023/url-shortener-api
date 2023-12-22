@@ -1,25 +1,26 @@
 const express = require("express");
 const dotenv = require("dotenv/config");
-const morgan = require("morgan");
+const pinoLogger = require("pino-http");
+const helmet = require("helmet");
 
 // connect with database
 require("./src/configs/database/mongodb");
 
 const app = express();
 
+app.use(helmet());
+
 // logger
-const logger = morgan("dev");
-app.use(logger);
+app.use(pinoLogger());
 
 app.use(express.json());
 
 app.use("/", require("./src/routes"));
 
 // Error handling
-app.use((err, req, res) => {
-  console.log(err);
+app.use((err, req, res, next) => {
   return res.status(500).json({
-    message: "Something went wrong.",
+    message: "Internal server error.",
   });
 });
 
