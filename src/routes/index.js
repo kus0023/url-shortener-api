@@ -6,6 +6,8 @@ routes.use("/shorten", require("./weburl.route"));
 
 routes.use("/auth", require("./auth.route"));
 
+routes.use("/health/check", (req, res) => res.json({ message: "ok" }));
+
 /**
  * This route will be public and can be used to access shorten URL.
  */

@@ -14,7 +14,18 @@ app.use(helmet());
 
 // logger
 if (process.env.NODE_ENV !== "test") {
-  app.use(pinoLogger());
+  app.use(
+    pinoLogger({
+      autoLogging: {
+        ignore: function (req) {
+          if (req.url === "/health/check") {
+            return true;
+          }
+          return false;
+        },
+      },
+    })
+  );
 }
 
 app.use(express.json());
