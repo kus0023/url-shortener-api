@@ -14,7 +14,7 @@ Deployed On: https://kus-shortyfy-api.onrender.com
 
 | Body       | Type     | Description                 |
 | :--------- | :------- | :-------------------------- |
-| `username` | `string` | **Required**. Your email    |
+| `email` | `string` | **Required**. Your email    |
 | `password` | `string` | **Required**. Your password |
 
 #### 2. Register User
